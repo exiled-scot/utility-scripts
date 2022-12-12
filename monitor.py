@@ -33,10 +33,12 @@ def identify_active_monitor():
     # Get the current mouse position
     mouse_x, mouse_y =  get_mouse_location()
 
-    # Get the display location for each monitor
+    # Get the display location for each monitor and check if the mouse coordinates are inside
+    # the boundary of the display
     for monitor in monitors:
         width, height, r_width, r_height = get_monitor_details(monitor)
-        print(monitor,mouse_x,mouse_y,width,height)
-        if mouse_x >= width and mouse_y >= height:
-            pass
+        # print(f' monitor {monitor}\n X {mouse_x}\n Y {mouse_y}\n width {width}\n height {height}')
+        if mouse_x >= width and mouse_x <= width + r_width and mouse_y >= height and mouse_y <= height + r_height:
+            return monitor
+
 print(identify_active_monitor())
