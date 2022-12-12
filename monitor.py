@@ -57,6 +57,19 @@ def get_monitor_state(monitor):
 
 def rotate_current_monitor():
     monitor = identify_active_monitor()
-    print(get_monitor_state(monitor))
+    monitor_state = get_monitor_state(monitor)
+    if monitor_state == "normal":
+        next_state = "inverted"
+    elif monitor_state == "inverted":
+        next_state = "right"
+    elif monitor_state == "right":
+        next_state = "left"
+    elif monitor_state == "left":
+        next_state = "normal"
+    else:
+        next_state = "normal"
+    cmd = f"xrandr --output \"{monitor}\" --rotate {next_state}"
+    print(monitor, next_state, cmd)
+    p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
 rotate_current_monitor()
