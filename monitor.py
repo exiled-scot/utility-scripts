@@ -1,5 +1,6 @@
 import subprocess
 import re
+import os
 
 def get_mouse_location():
     cmd = 'xdotool getmouselocation --shell'
@@ -41,4 +42,21 @@ def identify_active_monitor():
         if mouse_x >= width and mouse_x <= width + r_width and mouse_y >= height and mouse_y <= height + r_height:
             return monitor
 
-print(identify_active_monitor())
+def remove_non_alpha(w):
+    result=""
+    for l in w:
+        if l.isalpha():
+            result += l
+    return result
+
+def get_monitor_state(monitor):
+    cmd =  f"xrandr --query --verbose | grep  \"^{monitor} connected\" | cut -d ' ' -f 6"
+    p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    output = remove_non_alpha((p.communicate()[0]).decode())
+    return output
+
+def rotate_current_monitor():
+    monitor = identify_active_monitor()
+    print(get_monitor_state(monitor))
+
+rotate_current_monitor()
