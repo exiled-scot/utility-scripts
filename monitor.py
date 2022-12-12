@@ -15,7 +15,7 @@ def get_monitor_details(monitor):
     p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     output = (p.communicate()[0]).decode()
     pos = re.search(r'\+(\d*)\+(\d*)',output)
-    res = re.search(r'\(\d*)[xX](\d*)',output)
+    res = re.search(r'(\d*)[xX](\d*)',output)
     p_width = int(pos.group(1))
     p_height = int(pos.group(2))
     r_width = int(res.group(1))
