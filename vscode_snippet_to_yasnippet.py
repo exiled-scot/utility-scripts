@@ -1,13 +1,16 @@
 import json
 
+import sys
+
+snippet_file = sys.argv[1]
+dir_path = sys.argv[2]
+
 class Yasnippet():
     def __init__(self,name,key,command,comment):
         self.name = name
         self.key = key
         self.command = command
         self.comment = comment
-
-snippet_file = "/home/heretek/Programming/awesome-flutter-snippets/snippets/snippets.json"
 
 f = open(snippet_file)
 data = json.load(f)
@@ -29,8 +32,10 @@ for d in data:
 %s
 """
     yasnippet = (snippet % (s_name,s_key,s_desc,s_command))
-    path = "/home/heretek/Documents/snippets/dart-mode/%s" % s_key
+    path = "%s/%s" % (dir_path,s_key)
     f = open(path,"a")
     f.write(yasnippet)
     f.close()
 f.close()
+
+print("Done!")
