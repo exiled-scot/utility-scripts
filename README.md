@@ -2,9 +2,13 @@
 A collection of utilities and scripts that are not yet worthy of their own repo.
 
 # Table of Contents
+
 [Identify Monitor where the Mouse is Currently](#user-content-identify-mouse)
+
 [Rotate Monitor](#user-content-rotate-monitor)
+
 [Toggle Input](#user-content-toggle-input)
+
 [Vscode to Yasnippet Converter](#user-content-vscode-to-yasnippet-converter)
 
 ## Identify Mouse
